@@ -1,0 +1,16 @@
+- name: Modificando contraseña
+  copy:
+    src: files/tomcat-users.xml
+    dest: "{{directorio_inst}}/conf"
+    owner: "{{usuario_servicio}}"
+    group: "{{grupo_servicio}}"
+
+- name: Validando
+  systemd:
+    name: tomcat.service
+    state: stopped
+
+- name: Iniciando
+  systemd:
+    name: tomcat.service
+    state: started
